@@ -11,14 +11,27 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
+
+
+/* Route::get('/email', function() {
+
+    return new NewUserWelcomeMail();
+}); */
 
 Auth::routes();
-
+Route::post('follow/{user}', 'FollowController@store');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/profile/{id}', 'ProfileController@index');
+
+
+Route::get('/profile/{user}', 'ProfileController@index')->name('profile.index');
+Route::get('/profile/{user}/edit', 'ProfileController@edit')->name('profile.edit');
+Route::put('/profile/{user}','ProfileController@update');
+
+Route::get('/', 'PostController@index');
 Route::get('/p/create', 'PostController@create');
 Route::post('/p', 'PostController@store');
+Route::get('/p/{post}', 'PostController@show');
 
